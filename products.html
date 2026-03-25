@@ -2,11 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Retail Inventory & Demand View</title>
+  <title>Retail Inventory & Demand</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f4f4f4;
+      background-image: url('secound.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -15,7 +18,7 @@
     }
 
     .container {
-      background: #fff;
+      background: rgba(255, 255, 255, 0.85); /* semi-transparent white */
       padding: 25px 35px;
       border-radius: 8px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.2);
@@ -96,7 +99,6 @@
   </div>
 
   <script>
-    // Sample data shaped like a retail inventory + demand forecasting dataset
     const products = [
       { id: "E101", name: "Smartphone X", category: "Electronics", price: 699, stock: 120, forecast: 95 },
       { id: "E102", name: "Laptop Pro 14", category: "Electronics", price: 1199, stock: 45, forecast: 30 },
