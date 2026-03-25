@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Register a User</h1>
+    <!-- Change the path in action if you want a user to be redirected. -->
+    <form action = "" method = "post">
+    {% csrf_token %}
+    {{ form }}
+    <label>
+        <input type="submit" value = "Enroll {{ input_name }}">
+    </label>
+    </form>
+</body>
+</html>
