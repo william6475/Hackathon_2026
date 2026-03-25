@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Retail Inventory & Demand View</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: #fff;
+      padding: 25px 35px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      width: 480px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .row {
+      margin-bottom: 15px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    select {
+      width: 100%;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .details {
+      margin-top: 20px;
+      padding: 12px 15px;
+      border-radius: 6px;
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+    }
+
+    .details p {
+      margin: 4px 0;
+    }
+
+    .details span {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Retail Inventory & Demand</h2>
+
+    <div class="row">
+      <label for="category">Category</label>
+      <select id="category">
+        <option value="">-- Select Category --</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Clothing">Clothing</option>
+        <option value="Grocery">Grocery</option>
+        <option value="Toys">Toys</option>
+        <option value="Furniture">Furniture</option>
+      </select>
+    </div>
+
+    <div class="row">
+      <label for="product">Product</label>
+      <select id="product" disabled>
+        <option value="">-- Select Product --</option>
+      </select>
+    </div>
+
+    <div class="details" id="details" style="display:none;">
+      <p><span>Product ID:</span> <span id="d-id"></span></p>
+      <p><span>Product Name:</span> <span id="d-name"></span></p>
+      <p><span>Category:</span> <span id="d-cat"></span></p>
+      <p><span>Price:</span> $<span id="d-price"></span></p>
+      <p><span>Current Stock:</span> <span id="d-stock"></span> units</p>
+      <p><span>Forecast Demand (next period):</span> <span id="d-forecast"></span> units</p>
+    </div>
+  </div>
+
+  <script>
+    // Sample data shaped like a retail inventory + demand forecasting dataset
+    const products = [
+      { id: "E101", name: "Smartphone X", category: "Electronics", price: 699, stock: 120, forecast: 95 },
+      { id: "E102", name: "Laptop Pro 14", category: "Electronics", price: 1199, stock: 45, forecast: 30 },
+      { id: "C201", name: "Men's T-Shirt", category: "Clothing", price: 19, stock: 200, forecast: 150 },
+      { id: "C202", name: "Women's Jacket", category: "Clothing", price: 89, stock: 60, forecast: 40 },
+      { id: "G301", name: "Organic Apples (1kg)", category: "Grocery", price: 4, stock: 80, forecast: 70 },
+      { id: "G302", name: "Pasta Pack", category: "Grocery", price: 2, stock: 150, forecast: 130 },
+      { id: "T401", name: "Building Blocks Set", category: "Toys", price: 29, stock: 50, forecast: 35 },
+      { id: "T402", name: "Plush Bear", category: "Toys", price: 15, stock: 90, forecast: 60 },
+      { id: "F501", name: "Wooden Dining Table", category: "Furniture", price: 399, stock: 10, forecast: 6 },
+      { id: "F502", name: "Office Chair", category: "Furniture", price: 129, stock: 25, forecast: 18 }
+    ];
+
+    const categorySelect = document.getElementById("category");
+    const productSelect = document.getElementById("product");
+    const detailsBox = document.getElementById("details");
+
+    const dId = document.getElementById("d-id");
+    const dName = document.getElementById("d-name");
+    const dCat = document.getElementById("d-cat");
+    const dPrice = document.getElementById("d-price");
+    const dStock = document.getElementById("d-stock");
+    const dForecast = document.getElementById("d-forecast");
+
+    categorySelect.addEventListener("change", () => {
+      const cat = categorySelect.value;
+      productSelect.innerHTML = '<option value="">-- Select Product --</option>';
+      detailsBox.style.display = "none";
+
+      if (!cat) {
+        productSelect.disabled = true;
+        return;
+      }
+
+      const filtered = products.filter(p => p.category === cat);
+      filtered.forEach(p => {
+        const opt = document.createElement("option");
+        opt.value = p.id;
+        opt.textContent = p.name;
+        productSelect.appendChild(opt);
+      });
+
+      productSelect.disabled = false;
+    });
+
+    productSelect.addEventListener("change", () => {
+      const id = productSelect.value;
+      if (!id) {
+        detailsBox.style.display = "none";
+        return;
+      }
+
+      const product = products.find(p => p.id === id);
+      if (!product) return;
+
+      dId.textContent = product.id;
+      dName.textContent = product.name;
+      dCat.textContent = product.category;
+      dPrice.textContent = product.price;
+      dStock.textContent = product.stock;
+      dForecast.textContent = product.forecast;
+
+      detailsBox.style.display = "block";
+    });
+  </script>
+
+</body>
+</html>
