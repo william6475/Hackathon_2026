@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Secure Login Mock</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+
+      /* BACKGROUND IMAGE */
+      background-image: url('image.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      display: flex;
+      justify-content: flex-end;   /* move login box to the right */
+      align-items: center;         /* keep centered vertically */
+
+      padding-right: 120px;        /* adjust this to move slightly left/right */
+
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.85);
+      padding: 24px 28px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      width: 320px;
+    }
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 12px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      background: #007bff;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      background: #999;
+      cursor: not-allowed;
+    }
+
+    .links {
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+    }
+
+    .links a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+    }
+
+    .message {
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+
+    .message.error {
+      color: #b00020;
+    }
+
+    .message.success {
+      color: #0a7a2f;
+    }
+
+    .note {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <label for="username">Username</label>
+      <input id="username" type="text" name="username" required>
+
+      <label for="password">Password</label>
+      <input 
+        id="password"
+        type="password"
+        name="password"
+        required
+        minlength="12"
+        pattern
+
+\[\]
+
+        title="Password must be at least 12 characters long, include a number, and a special character."
+        placeholder="Min 12 chars + number + special char"
+      >
+
+      <button type="submit" id="loginButton">Login</button>
+    </form>
+
+    <div class="links">
+      <a href="#" id="forgotPassword">Forgot password?</a>
+      <a href="#" id="recoverAccount">Recover account</a>
+    </div>
+
+    <div id="message" class="message"></div>
+    <div class="note">
+      Security note: Max 3 failed login attempts per hour (demo only).
+    </div>
+  </div>
+
+  <script>
+    const MAX_ATTEMPTS = 3;
+    const WINDOW_MS = 60 * 60 * 1000;
+
+    const form = document.getElementById('loginForm');
+    const messageEl = document.getElementById('message');
+    const loginButton = document.getElementById('loginButton');
+
+    function getAttempts() {
+      const raw = localStorage.getItem('loginAttempts');
+      if (!raw) return [];
+      try {
+        const arr = JSON.parse(raw);
+        return Array.isArray(arr) ? arr : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function setAttempts(attempts) {
+      localStorage.setItem('loginAttempts', JSON.stringify(attempts));
+    }
+
+    function cleanOldAttempts() {
+      const now = Date.now();
+      const attempts = getAttempts().filter(ts => now - ts < WINDOW_MS);
+      setAttempts(attempts);
+      return attempts;
+    }
+
+    function isRateLimited() {
+      const attempts = cleanOldAttempts();
+      return attempts.length >= MAX_ATTEMPTS;
+    }
+
+    function recordFailedAttempt() {
+      const attempts = cleanOldAttempts();
+      attempts.push(Date.now());
+      setAttempts(attempts);
+    }
+
+    function updateRateLimitUI() {
+      if (isRateLimited()) {
+        loginButton.disabled = true;
+        messageEl.textContent = "Too many failed attempts. Try again after one hour.";
+        messageEl.className = "message error";
+      } else {
+        loginButton.disabled = false;
+      }
+    }
+
+    updateRateLimitUI();
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      messageEl.textContent = "";
+      messageEl.className = "message";
+
+      if (isRateLimited()) {
+        updateRateLimitUI();
+        return;
+      }
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+
+      const DEMO_USER = "user@example.com";
+      const DEMO_PASS = "VeryStrongPass!";
+
+      if (username === DEMO_USER && password === DEMO_PASS) {
+        messageEl.textContent = "Login successful (demo).";
+        messageEl.className = "message success";
+        setAttempts([]);
+      } else {
+        recordFailedAttempt();
+        if (isRateLimited()) updateRateLimitUI();
+        messageEl.textContent = "Invalid username or password.";
+        messageEl.className = "message error";
+      }
+    });
+
+    document.getElementById('forgotPassword').addEventListener('click', function (e) {
+      e.preventDefault();
+      alert("Forgot password flow would start here.");
+    });
+
+    document.getElementById('recoverAccount').addEventListener('click', function (e) {
+      e.preventDefault();
+      alert("Account recovery flow would start here.");
+    });
+  </script>
+</body>
+</html>
