@@ -12,7 +12,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, User
 
 #this function allows the user to view item recommendations
 def home(request):
-    template = loader.get_template('index.html')
+    template = loader.get_template('catalogue.html')
     item_recommendations = ["Temp Value","Temp Value"]
     context = {'temp' : item_recommendations}
     return HttpResponse(template.render(context, request))

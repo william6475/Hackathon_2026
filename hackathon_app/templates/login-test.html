@@ -7,10 +7,25 @@
   <link rel="stylesheet" href="{% static 'styles.css' %}">
     <style>
         body{
-            background-image: url("{% static 'login image.png' %}");
+            background-image: url("{% static 'new login image.png' %}");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+        }
+        .button{
+            width: 70%;
+            padding: 10px;
+            background-color: #007bff;
+            color: aliceblue;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            margin-left: 15%;
+        }
+        .button:hover {
+            background-color: midnightblue;
         }
     </style>
 </head>
@@ -21,7 +36,7 @@
     {% csrf_token %}
     {{ form }}
     <label>
-        <input type="submit" value = "Enroll {{ input_name }}">
+        <input type="submit" class = "button" value = "log in">
     </label>
     </form>
       <!--
