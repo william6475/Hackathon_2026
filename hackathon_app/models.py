@@ -10,6 +10,26 @@ class user_table  (models.Model):
     class Meta:
         db_table = 'user_table'
 
+class sales(models.Model):
+    stock_id = models.AutoField(primary_key=True)
+    store_id = models.TextField(max_length=4)
+    product_id = models.TextField(max_length=5)
+    category = models.TextField(max_length=20)
+    region = models.TextField(max_length=5)
+    inventory_level = models.IntegerField()
+    units_sold = models.IntegerField()
+    units_ordered = models.IntegerField()
+    price = models.FloatField()
+    discount = models.IntegerField()
+    weather_condition = models.TextField()
+    promotion = models.IntegerField()
+    competitor_pricing = models.FloatField()
+    seasonality = models.TextField()
+    epidemic = models.IntegerField()
+    demand = models.IntegerField()
+    class Meta:
+        db_table = 'sales_data'
+
 
 """
 class CustomUserManager(UserManager):

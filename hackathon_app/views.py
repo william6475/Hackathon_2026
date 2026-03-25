@@ -21,7 +21,7 @@ def home(request):
 
 """
 Functions require the user to:
- - Front page with login functionality.
+ - Front page with login functionality. (DONE)
  - view item recommendations based off taste profile
  - admins can update stock amount
  - auto-stock functionality
