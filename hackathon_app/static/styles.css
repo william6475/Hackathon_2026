@@ -109,3 +109,31 @@ body {
       font-size: 0.8rem;
       color: #555;
     }
+
+    .topnav {
+    background-color: #63918f !important;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.topnav a {
+    float: left;
+    color: #f2f2f2 !important;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    display: block;
+}
+
+.topnav a:hover {
+    background-color: #ddd !important;
+    color: black !important;
+}
+
+.topnav a.active {
+    background-color: #486a69 !important;
+    color: white !important;
+}

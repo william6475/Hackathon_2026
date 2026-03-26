@@ -4,6 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Retail Inventory & Demand</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -66,7 +69,9 @@
   </style>
 </head>
 <body>
+<!-- Navigation -->
 
+<!-- The code below is responsible for the catalogue selection -->
   <div class="container">
     <h2>Retail Inventory & Demand</h2>
 
@@ -97,21 +102,26 @@
       <p><span>Current Stock:</span> <span id="d-stock"></span> units</p>
       <p><span>Forecast Demand (next period):</span> <span id="d-forecast"></span> units</p>
     </div>
+      <br>
+      <div class = "row">
+          <a href = "{% url 'home' %}">Back to Home </a>
+      </div>
   </div>
 
   <script>
-    const products = [
-      { id: "E101", name: "Smartphone X", category: "Electronics", price: 699, stock: 120, forecast: 95 },
-      { id: "E102", name: "Laptop Pro 14", category: "Electronics", price: 1199, stock: 45, forecast: 30 },
-      { id: "C201", name: "Men's T-Shirt", category: "Clothing", price: 19, stock: 200, forecast: 150 },
-      { id: "C202", name: "Women's Jacket", category: "Clothing", price: 89, stock: 60, forecast: 40 },
-      { id: "G301", name: "Organic Apples (1kg)", category: "Grocery", price: 4, stock: 80, forecast: 70 },
-      { id: "G302", name: "Pasta Pack", category: "Grocery", price: 2, stock: 150, forecast: 130 },
-      { id: "T401", name: "Building Blocks Set", category: "Toys", price: 29, stock: 50, forecast: 35 },
-      { id: "T402", name: "Plush Bear", category: "Toys", price: 15, stock: 90, forecast: 60 },
-      { id: "F501", name: "Wooden Dining Table", category: "Furniture", price: 399, stock: 10, forecast: 6 },
-      { id: "F502", name: "Office Chair", category: "Furniture", price: 129, stock: 25, forecast: 18 }
-    ];
+      const products = [
+          { id: {{ elec_1.product_label }}, name: {{elec_1_name}}, category: {{elec_1.category}}, price: {{elec_1.price}}, stock: {{elec_1.inventory_level}}, forecast: {{elec_1.forecast}} },
+          { id: {{ elec_2.product_label }}, name: {{elec_2_name}}, category: {{elec_2.category}}, price: {{elec_2.price}}, stock: {{elec_2.inventory_level}}, forecast: {{elec_2.forecast}} },
+          { id: {{ clot_1.product_label }}, name: {{clot_1_name}}, category: {{clot_1.category}}, price: {{clot_1.price}}, stock: {{clot_1.inventory_level}}, forecast: {{clot_1.forecast}} },
+          { id: {{ clot_2.product_label }}, name: {{clot_2_name}}, category: {{clot_2.category}}, price: {{clot_2.price}}, stock: {{clot_2.inventory_level}}, forecast: {{clot_2.forecast}} },
+          { id: {{ groc_1.product_label }}, name: {{groc_1_name}}, category: {{groc_1.category}}, price: {{groc_1.price}}, stock: {{groc_1.inventory_level}}, forecast: {{groc_1.forecast}} },
+          { id: {{ groc_2.product_label }}, name: {{groc_2_name}}, category: {{groc_2.category}}, price: {{groc_2.price}}, stock: {{groc_2.inventory_level}}, forecast: {{groc_2.forecast}} },
+          { id: {{ toys_1.product_label }}, name: {{toys_1_name}}, category: {{toys_1.category}}, price: {{toys_1.price}}, stock: {{toys_1.inventory_level}}, forecast: {{toys_1.forecast}} },
+          { id: {{ toys_2.product_label }}, name: {{toys_2_name}}, category: {{toys_2.category}}, price: {{toys_2.price}}, stock: {{toys_2.inventory_level}}, forecast: {{toys_2.forecast}} },
+          { id: {{ furn_1.product_label }}, name: {{furn_1_name}}, category: {{furn_1.category}}, price: {{furn_1.price}}, stock: {{furn_1.inventory_level}}, forecast: {{furn_1.forecast}} },
+          { id: {{ furn_2.product_label }}, name: {{furn_2_name}}, category: {{furn_2.category}}, price: {{furn_2.price}}, stock: {{furn_2.inventory_level}}, forecast: {{furn_2.forecast}} },
+
+      ]
 
     const categorySelect = document.getElementById("category");
     const productSelect = document.getElementById("product");

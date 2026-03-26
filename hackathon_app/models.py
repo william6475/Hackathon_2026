@@ -12,7 +12,7 @@ class user_table  (models.Model):
 
 class products_list(models.Model):
     products_list_id = models.AutoField(primary_key=True)
-    product_id = models.TextField(max_length=5)
+    product_label = models.TextField(max_length=5)
     product_description = models.TextField(blank=True)
     class Meta:
         db_table = 'products_list'
@@ -22,7 +22,7 @@ class products_list(models.Model):
 class sales(models.Model):
     stock_id = models.AutoField(primary_key=True)
     store_id = models.TextField(max_length=4)
-    product_id = models.ForeignKey("sales", db_column="product_id", on_delete=models.PROTECT)
+    product_label = models.TextField(max_length=5)
     category = models.TextField(max_length=20)
     region = models.TextField(max_length=5)
     inventory_level = models.IntegerField()
