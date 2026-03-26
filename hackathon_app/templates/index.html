@@ -6,12 +6,9 @@
     <title>Test</title>
 </head>
 <body>
-    <h1>Value(s) stored in temp function :</h1>
-    <p>
-        {% for value in temp %}
-            <ul>value</ul>
-        {% endfor %}
-    </p>
-    <p>
+    <h1>Home</h1>
+    
+    <a class="button" href="{% url 'login' %}">Log out</a>
+     <a class="button" href="{% url 'register' %}">Register user</a>
 </body>
 </html>
