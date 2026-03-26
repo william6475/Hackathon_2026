@@ -4,10 +4,12 @@
     {% load static %}
     <meta charset="UTF-8">
     <title>Test</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style>
         body, html {
             margin: 0;
             padding: 0;
+            background-image: url("{% static 'plain background.jpg' %}");
         }
 
         .main-content {
@@ -28,10 +30,10 @@
             padding: 40px;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            text-align: left;
+            text-align: center;
             width: 100%;
             max-width: 400px;
-            margin-top: 25px; /* Space for the absolute logo */
+            margin-top: 250px; /* Space for the absolute logo */
         }
 
         .login-box h1 {
@@ -110,9 +112,20 @@
     </style>
 </head>
 <body>
-    <h1>Home</h1>
-    
-    <a class="button" href="{% url 'login' %}">Log out</a>
-     <a class="button" href="{% url 'register' %}">Register user</a>
+    <div class = "main-content">
+                <div class = "login-box">
+                    <h1>Home</h1>
+                    <hr>
+                    <a class="button" href="{% url 'catalogue' %}">
+                        <input type="submit" class = "button" value = "View Catalogue">
+                    </a>
+                    <a class="button" href="{% url 'register' %}">
+                        <input type="submit" class = "button" value = "Register user">
+                    </a>
+                    <hr>
+                    <a class="button" href="{% url 'logout' %}">
+                        <input type="submit" class = "button" style="background-color: darkred" value = "Log out">
+                    </a>
+                </div>
 </body>
 </html>

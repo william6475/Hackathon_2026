@@ -1,18 +1,134 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-image: url("{% static 'plain background.jpg' %}");
+        }
+
+        .main-content {
+            padding: 0;
+            margin: 0;
+            position: static;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 20px;
+            min-height: 100vh;
+        }
+
+        .login-box {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            width: 100%;
+            max-width: 400px;
+            margin-top: 25px; /* Space for the absolute logo */
+        }
+
+        .login-box h1 {
+            margin-top: 0;
+            color: #333;
+
+        }
+
+        .login-logo{
+            max-height: 150px;
+            max-width: 150px;
+        }
+        .topPad{
+            padding-top: 90px;
+        }
+
+        .login-box form label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .login-box input[type="text"],
+        .login-box input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .login-box input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #63918f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .login-box input[type="submit"]:hover {
+            background-color: #486a69;
+        }
+        .logo {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .main-content > *:first-child {
+            margin-top: 0 !important;
+        }
+
+        @media (max-width: 915px) {
+            .login-box input[type="submit"] {
+            width: 20%;
+            padding: 10px;
+            background-color: #63918f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        }
+    </style>
 </head>
 <body>
-    <h1>Register a User</h1>
+<div class = "main-content">
+    <div class = "login-box">
+        <h1>Register a User</h1>
     <!-- Change the path in action if you want a user to be redirected. -->
     <form action = "" method = "post">
     {% csrf_token %}
     {{ form }}
     <label>
-        <input type="submit" value = "Enroll {{ input_name }}">
+        <input type="submit" value = "Register user">
     </label>
     </form>
+        <div class = "row">
+          <a href = "{% url 'home' %}" style = "justify-content: center">Back to Home </a>
+      </div>
+    </div>
+
+</div>
+
 </body>
 </html>
