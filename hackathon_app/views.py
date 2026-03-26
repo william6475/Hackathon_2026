@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.shortcuts import render, redirect
-
 import hackathon_app.models
 from hackathon_app.models import user_table, sales, products_list
 # from hackathon_app.models import admin,endUser,Generic_User
@@ -20,7 +19,7 @@ def home(request):
     return HttpResponse(template.render(context, request))
 
 def catalogue(request):
-    template = loader.get_template('catalogue.html')
+    template = loader.get_template('new-catalogue.html')
     elec_1_query = sales.objects.raw("Select * from main.sales_data where product_label = 'P0001'")
     elec_1 = elec_1_query[1]
     elec_1_name = products_list.objects.get(product_label='P0001').product_description
@@ -51,6 +50,12 @@ def catalogue(request):
     groc_4_query = sales.objects.raw("Select * from main.sales_data where product_label = 'P0014'")
     groc_4_name = products_list.objects.get(product_label='P0014').product_description
     groc_4 = groc_4_query[1]
+    groc_5_query = sales.objects.raw("Select * from main.sales_data where product_label = 'P0016'")
+    groc_5_name = products_list.objects.get(product_label='P0016').product_description
+    groc_5 = groc_5_query[1]
+    groc_6_query = sales.objects.raw("Select * from main.sales_data where product_label = 'P0018'")
+    groc_6_name = products_list.objects.get(product_label='P0018').product_description
+    groc_6 = groc_6_query[1]
     toys_1_name = "temp"
     toys_1 = ["temp"]
     toys_2_name = "temp"
@@ -61,6 +66,10 @@ def catalogue(request):
     furn_2 = ["temp"]
 
 
+    # This function runs the forecast. It is functional and returns a decimal value between 0 and 1
+    # Use the prediction context variable
+    #elec_1_forecast = predictions.get_demand_predictions(prediction_context)
+
     item_recommendations = ["Temp Value","Temp Value"]
     context = {
         'elec_1' : elec_1,
@@ -69,6 +78,7 @@ def catalogue(request):
         'elec_2_name': elec_2_name,
         'elec_3': elec_3,
         'elec_3_name': elec_3_name,
+
     }
     return HttpResponse(template.render(context, request))
 
