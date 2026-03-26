@@ -11,16 +11,28 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 import os
 from pathlib import Path
+import dj_database_url
+from dotenv import load_dotenv
 
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = os.environ.get('SECRET_KEY','fallback-key-for-local-dev-only')
+
+DATABASE_URL = os.environ.get('postgresql://goodnest_db_user:913bb11mCt1pKbHXWe5i8qkb97seMGs1@dpg-d7275t19fqoc73a6b750-a.frankfurt-postgres.render.com/goodnest_db')
+
+DATABASES = dj_database_url.parse(DATABASE_URL, conn_max_age=600)
+
+SECURE_BROWSER_XSS_FILTER = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ua#d5z^l8(z#6d3g3aqhd3s0hw4ekjsb_eh*2o8^f!f^brd4@%'
+# SECRET_KEY = 'django-insecure-ua#d5z^l8(z#6d3g3aqhd3s0hw4ekjsb_eh*2o8^f!f^brd4@%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -76,7 +88,7 @@ WSGI_APPLICATION = 'hackathon_2026.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.pos',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
@@ -112,6 +124,9 @@ USE_I18N = True
 
 USE_TZ = True
 
+X_FRAME_OPTIONS = 'Deny'
+
+SECURE_CONTENT_TYPE_NOSNIFF = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/

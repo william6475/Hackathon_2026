@@ -28,6 +28,7 @@
             background-color: midnightblue;
         }
     </style>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://hackathon-2026-4uvk.onrender.com/;">
 </head>
 <body>
   <div class="container">
@@ -39,29 +40,6 @@
         <input type="submit" class = "button" value = "log in">
     </label>
     </form>
-      <!--
-    <form id="loginForm">
-      <label for="username">Username</label>
-      <input id="username" type="text" name="username" required>
-
-      <label for="password">Password</label>
-      <input
-        id="password"
-        type="password"
-        name="password"
-        required
-        minlength="12"
-        pattern
-
-\[\]
-
-        title="Password must be at least 12 characters long, include a number, and a special character."
-        placeholder="Min 12 chars + number + special char"
-      >
-
-      <button type="submit" id="loginButton">Login</button>
-    </form>
-    -->
     <div class="links">
       <a href="#" id="forgotPassword">Forgot password?</a>
       <a href="#" id="recoverAccount">Recover account</a>
@@ -72,98 +50,5 @@
       Security note: Max 3 failed login attempts per hour (demo only).
     </div>
   </div>
-
-  <!--
-  <script>
-    const MAX_ATTEMPTS = 3;
-    const WINDOW_MS = 60 * 60 * 1000;
-    const form = document.getElementById('loginForm');
-    const messageEl = document.getElementById('message');
-    const loginButton = document.getElementById('loginButton');
-
-    function getAttempts() {
-      const raw = localStorage.getItem('loginAttempts');
-      if (!raw) return [];
-      try {
-        const arr = JSON.parse(raw);
-        return Array.isArray(arr) ? arr : [];
-      } catch {
-        return [];
-      }
-    }
-
-    function setAttempts(attempts) {
-      localStorage.setItem('loginAttempts', JSON.stringify(attempts));
-    }
-
-    function cleanOldAttempts() {
-      const now = Date.now();
-      const attempts = getAttempts().filter(ts => now - ts < WINDOW_MS);
-      setAttempts(attempts);
-      return attempts;
-    }
-
-    function isRateLimited() {
-      const attempts = cleanOldAttempts();
-      return attempts.length >= MAX_ATTEMPTS;
-    }
-
-    function recordFailedAttempt() {
-      const attempts = cleanOldAttempts();
-      attempts.push(Date.now());
-      setAttempts(attempts);
-    }
-
-    function updateRateLimitUI() {
-      if (isRateLimited()) {
-        loginButton.disabled = true;
-        messageEl.textContent = "Too many failed attempts. Try again after one hour.";
-        messageEl.className = "message error";
-      } else {
-        loginButton.disabled = false;
-      }
-    }
-
-    updateRateLimitUI();
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      messageEl.textContent = "";
-      messageEl.className = "message";
-
-      if (isRateLimited()) {
-        updateRateLimitUI();
-        return;
-      }
-
-      const username = document.getElementById('username').value.trim();
-      const password = document.getElementById('password').value;
-
-      const DEMO_USER = "user@example.com";
-      const DEMO_PASS = "VeryStrongPass!";
-
-      if (username === DEMO_USER && password === DEMO_PASS) {
-        messageEl.textContent = "Login successful (demo).";
-        messageEl.className = "message success";
-        setAttempts([]);
-      } else {
-        recordFailedAttempt();
-        if (isRateLimited()) updateRateLimitUI();
-        messageEl.textContent = "Invalid username or password.";
-        messageEl.className = "message error";
-      }
-    });
-
-    document.getElementById('forgotPassword').addEventListener('click', function (e) {
-      e.preventDefault();
-      alert("Forgot password flow would start here.");
-    });
-
-    document.getElementById('recoverAccount').addEventListener('click', function (e) {
-      e.preventDefault();
-      alert("Account recovery flow would start here.");
-    });
-  </script>
-  -->
 </body>
 </html>

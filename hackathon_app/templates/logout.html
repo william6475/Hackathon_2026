@@ -1,0 +1,6 @@
+<h1>Click to logout.</h1>
+<p>{{ status }}</p>
+<form method = "post">
+    {% csrf_token %}
+    <input type="submit" value="Log Out" />
+</form>
