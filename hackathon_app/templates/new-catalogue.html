@@ -1,0 +1,317 @@
+
+<!Doctype html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'stupac_template/styles.css' %}?v=16">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-content {
+            padding: 0;
+            margin: 0;
+            position: static;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 20px;
+            min-height: 100vh;
+        }
+
+        .login-box {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            width: 100%;
+            max-width: 400px;
+            margin-top: 25px; /* Space for the absolute logo */
+        }
+
+        .login-box h1 {
+            margin-top: 0;
+            color: #333;
+
+        }
+
+        .login-logo{
+            max-height: 150px;
+            max-width: 150px;
+        }
+        .topPad{
+            padding-top: 90px;
+        }
+
+        .login-box form label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .login-box input[type="text"],
+        .login-box input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .login-box input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #63918f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .login-box input[type="submit"]:hover {
+            background-color: #486a69;
+        }
+        .logo {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .main-content > *:first-child {
+            margin-top: 0 !important;
+        }
+
+        @media (max-width: 915px) {
+            .login-box input[type="submit"] {
+            width: 20%;
+            padding: 10px;
+            background-color: #63918f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        }
+    </style>
+    <title>Login</title>
+    <link rel="icon" href="data:,">
+</head>
+<body>
+
+    <div class="main-content topPad">
+        <div  class="login-box">
+
+                <h1>Electronics</h1>
+            <hr>
+                <div class = "col-3">
+                    <h3>{{ elec_1_name }}</h3>
+                    <p>
+                        Category : {{elec_1.category}}
+                    </p>
+                    <p>
+                        Price : {{elec_1.price}}
+                    </p>
+                    <p>
+                        Stock : {{elec_1.inventory_level}}
+                    </p>
+                    <p>
+                        Predicted Demand : **Calculated Demand**
+                    </p>
+                </div>
+            <hr>
+            <div class = "col-3">
+                    <h3>{{ elec_2_name }}</h3>
+                    <p>
+                        Category : {{elec_2.category}}
+                    </p>
+                    <p>
+                        Price : {{elec_2.price}}
+                    </p>
+                    <p>
+                        Stock : {{elec_2.inventory_level}}
+                    </p>
+                    <p>
+                        Predicted Demand : **Calculated Demand**
+                    </p>
+                </div>
+            <hr>
+            <div class = "col-3">
+                    <h3>{{ elec_3_name }}</h3>
+                    <p>
+                        Category : {{elec_3.category}}
+                    </p>
+                    <p>
+                        Price : {{elec_3.price}}
+                    </p>
+                    <p>
+                        Stock : {{elec_3.inventory_level}}
+                    </p>
+                    <p>
+                        Predicted Demand : **Calculated Demand**
+                    </p>
+                </div>
+            <hr>
+            </div>
+            <div class = "login-box">
+                <h1>Clothing</h1>
+                <div class = "col-3">
+                    <h3>{{ clot_1_name }}</h3>
+                    <p>
+                        Category : {{clot_1.category}}
+                    </p>
+                    <p>
+                        Price : {{clot_1.price}}
+                    </p>
+                    <p>
+                        Stock : {{clot_1.inventory_level}}
+                    </p>
+                    <p>
+                        Predicted Demand : **Calculated Demand**
+                    </p>
+                </div>
+            <hr>
+                <div class = "col-3">
+                    <h3>{{ clot_2_name }}</h3>
+                    <p>
+                        Category : {{clot_2.category}}
+                    </p>
+                    <p>
+                        Price : {{clot_2.price}}
+                    </p>
+                    <p>
+                        Stock : {{clot_2.inventory_level}}
+                    </p>
+                    <p>
+                        Predicted Demand : **Calculated Demand**
+                    </p>
+                </div>
+            <hr>
+            </div>
+            <div class = "login-box">
+                <h1>Furniture</h1>
+                <div class = "col-3">
+                    <h3>{{ furn_1_name }}</h3>
+                    <p>
+                        Category : {{furn_1.category}}
+                    </p>
+                    <p>
+                        Price : {{furn_1.price}}
+                    </p>
+                    <p>
+                        Stock : {{furn_1.inventory_level}}
+                    </p>
+                    <p>
+                        Predicted Demand : **Calculated Demand**
+                    </p>
+                </div>
+            <hr>
+                <div class = "col-3">
+                    <h3>{{ furn_2_name }}</h3>
+                    <p>
+                        Category : {{furn_2.category}}
+                    </p>
+                    <p>
+                        Price : {{furn_2.price}}
+                    </p>
+                    <p>
+                        Stock : {{furn_2.inventory_level}}
+                    </p>
+                    <p>
+                        Predicted Demand : **Calculated Demand**
+                    </p>
+                </div>
+            <hr>
+            </div>
+            <div class = "login-box">
+                <h1>Toys</h1>
+                <div class = "col-3">
+                    <h3>{{ toys_1_name }}</h3>
+                    <p>
+                        Category : {{toys_1.category}}
+                    </p>
+                    <p>
+                        Price : {{toys_1.price}}
+                    </p>
+                    <p>
+                        Stock : {{toys_1.inventory_level}}
+                    </p>
+                    <p>
+                        Predicted Demand : **Calculated Demand**
+                    </p>
+                </div>
+            <hr>
+                <div class = "col-3">
+                    <h3>{{ toys_2_name }}</h3>
+                    <p>
+                        Category : {{toys_2.category}}
+                    </p>
+                    <p>
+                        Price : {{toys_2.price}}
+                    </p>
+                    <p>
+                        Stock : {{toys_2.inventory_level}}
+                    </p>
+                    <p>
+                        Predicted Demand : **Calculated Demand**
+                    </p>
+                </div>
+            <hr>
+            </div>
+            <div class = "login-box">
+                <h1>Groceries</h1>
+                <div class = "col-3">
+                    <h3>{{ groc_1_name }}</h3>
+                    <p>
+                        Category : {{groc_1.category}}
+                    </p>
+                    <p>
+                        Price : {{groc_1.price}}
+                    </p>
+                    <p>
+                        Stock : {{groc_1.inventory_level}}
+                    </p>
+                    <p>
+                        Predicted Demand : **Calculated Demand**
+                    </p>
+                </div>
+            <hr>
+                <div class = "col-3">
+                    <h3>{{ groc_2_name }}</h3>
+                    <p>
+                        Category : {{groc_2.category}}
+                    </p>
+                    <p>
+                        Price : {{groc_2.price}}
+                    </p>
+                    <p>
+                        Stock : {{groc_2.inventory_level}}
+                    </p>
+                    <p>
+                        Predicted Demand : **Calculated Demand**
+                    </p>
+                </div>
+            <hr>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

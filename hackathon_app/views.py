@@ -56,14 +56,24 @@ def catalogue(request):
     groc_6_query = sales.objects.raw("Select * from main.sales_data where product_label = 'P0018'")
     groc_6_name = products_list.objects.get(product_label='P0018').product_description
     groc_6 = groc_6_query[1]
-    toys_1_name = "temp"
-    toys_1 = ["temp"]
-    toys_2_name = "temp"
-    toys_2 = ["temp"]
+
+    toys_1_query = sales.objects.raw("Select * from main.sales_data where product_label = 'P0006'")
+    toys_1_name = products_list.objects.get(product_label='P0006').product_description
+    toys_1 = toys_1_query[1]
+    toys_2_query = sales.objects.raw("Select * from main.sales_data where product_label = 'P0013'")
+    toys_2_name = products_list.objects.get(product_label='P0013').product_description
+    toys_2 = toys_2_query[1]
+
     furn_1_name = "temp"
     furn_1 = ["temp"]
     furn_2_name = "temp"
     furn_2 = ["temp"]
+    furn_1_query = sales.objects.raw("Select * from main.sales_data where product_label = 'P0010'")
+    furn_1_name = products_list.objects.get(product_label='P0010').product_description
+    furn_1 = furn_1_query[1]
+    furn_1_query = sales.objects.raw("Select * from main.sales_data where product_label = 'P0011'")
+    furn_1_name = products_list.objects.get(product_label='P0011').product_description
+    furn_1 = furn_1_query[1]
 
 
     # This function runs the forecast. It is functional and returns a decimal value between 0 and 1
@@ -78,6 +88,18 @@ def catalogue(request):
         'elec_2_name': elec_2_name,
         'elec_3': elec_3,
         'elec_3_name': elec_3_name,
+        'clot_1' : clot_1,
+        'clot_1_name' : clot_1_name,
+        'clot_2': clot_2,
+        'clot_2_name' : clot_2_name,
+        'groc_1' : groc_1,
+        'groc_1_name' : groc_1_name,
+        'groc_2' : groc_2,
+        'groc_2_name' : groc_2_name,
+        'toys_1' : toys_1,
+        'toys_1_name' : toys_1_name,
+        'toys_2' : toys_2,
+        'toys_2_name' : toys_2_name
 
     }
     return HttpResponse(template.render(context, request))
