@@ -25,10 +25,10 @@ data_frame['Product ID'] = data_frame['Product ID'].str.split('P').str[1]
 
 #Encode each string column (So skillet learn can understand it)
 encoder = OneHotEncoder(sparse_output=False)
-encoded_categories = encoder.fit_transform(data_frame[['Category']])
-encoded_regions = encoder.fit_transform(data_frame[['Region']])
-encoded_weather_conditions = encoder.fit_transform(data_frame[['Weather Condition']])
-encoded_seasons = encoder.fit_transform(data_frame[['Seasonality']])
+columns_to_encode = ['Category', 'Region', 'Weather Condition', 'Seasonality']
+encoded_columns = encoder.fit_transform(data_frame[columns_to_encode])
+
+joblib.dump(encoder, 'encoder.joblib')
 
 #Convert string columns storing int values to int columns
 data_frame['Year'] = data_frame['Year'].astype(int)
@@ -51,10 +51,7 @@ data_frame['Demand'] = data_frame['Demand'].astype(int)
 #Give x the data from the dataframe (Not demand which will be predicted)
 x_before_strings_added = data_frame.drop(['Demand', 'Category', 'Region', 'Weather Condition', 'Seasonality'], axis=1)
 x = pd.concat([x_before_strings_added,
-               pd.DataFrame(encoded_categories),
-    pd.DataFrame(encoded_weather_conditions),
-    pd.DataFrame(encoded_regions),
-    pd.DataFrame(encoded_seasons),
+               pd.DataFrame(encoded_columns),
                ], axis=1) #Add all the data to x
 
 x.columns = x.columns.astype(str)
